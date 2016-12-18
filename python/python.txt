@@ -1,0 +1,15 @@
+# documentation GO
+godoc -http=:8000
+
+#lance un petit serveur python
+python -m SimpleHTTPServer 
+
+#parser dans la console un fichier json
+cat testDecode.json | python -m json.tool
+
+
+
+rsync -az warzone/ root@10.11.90.104:/var/www/wardash
+
+#Supprimer un dossier
+rm -rf 
