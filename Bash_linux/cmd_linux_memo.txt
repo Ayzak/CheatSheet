@@ -1,0 +1,46 @@
+==============================================================
+-			Memo des commandes linux méconnus				 -
+==============================================================
+
+du -ma | sort -nr | head -n 20
+# List the 20 largest files or folders under the current working directory.
+
+du -sh ./* # affiche la taille de tous les fichier présent ici
+du -sh /tmp # affiche la taille du dossier /tmp
+
+df -h #affiche les taille et détails sur TOUTES les partitions et dossier systèmes importants.
+
+=== Historique ===
+
+!! -> repète la commande précédente (ex: sudo !!)
+!pw -> répète la dernière commande commençant par pw (ex: pwd)
+!pw:p -> :p affiche la commande qui sera éxecuté avec !pw.
+!N -> N est le n° de commande (de l'history) que vous voulez executé. Le :p fonctionne ici aussi.
+______________________________________________________________
+Ex: Ceci est l'history:
+	1- sudo apt-get install
+	2- rm -rf 
+	3- dpkg -i 
+	4- apt-get remove
+
+$ !2 -> executera rm -rf
+______________________________________________________________
+
+ctrl+r -> recherche interactive de commande déjà rentré 
+
+=== ! ===
+
+!$ -> ex: grep -i /home/jaja/Some/long/way.txt -> vim !$. :p fonctionn ici aussi.
+!* -> Est tout l'argument de la commande précédente.
+________________________________________________________
+ex: 
+$ vi cd /stuff #(oops!)
+[exit vi twice]
+$ !*:p
+-> cd stuff
+________________________________________________________
+
+=== ^ ===
+
+$ vi /etc/Somefile.conf #(oops!)
+$ ^f^Fgl

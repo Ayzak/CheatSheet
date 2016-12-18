@@ -1,0 +1,15 @@
+dmenu_run -b -p drad$ -nb '#000000' -nf '#FFFFFF' -sb '#848484' -sf '#000000'
+rsync -az warzone/ root@10.11.90.104:/var/www/wardash
+
+scp warzone.html root@10.11.90.104:/var/www/wardash
+
+#cloner un dépot dans un dossier ayant un autre nom
+git clone git@gitlab.office.sysdream.com:nuitduhack/warzone.git -b alpha2 wardash
+
+#Supprimer un dossier
+rm -rf 
+
+#essayer avec nitrogen double écran ligne de commande 
+/home/jeremy/Images/miku 11.jpg [1]
+
+
