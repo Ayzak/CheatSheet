@@ -1,0 +1,680 @@
+\documentclass[10pt,a4paper]{article}
+
+% Packages
+\usepackage{fancyhdr}           % For header and footer
+\usepackage{multicol}           % Allows multicols in tables
+\usepackage{tabularx}           % Intelligent column widths
+\usepackage{tabulary}           % Used in header and footer
+\usepackage{hhline}             % Border under tables
+\usepackage{graphicx}           % For images
+\usepackage{xcolor}             % For hex colours
+%\usepackage[utf8x]{inputenc}    % For unicode character support
+\usepackage[T1]{fontenc}        % Without this we get weird character replacements
+\usepackage{colortbl}           % For coloured tables
+\usepackage{setspace}           % For line height
+\usepackage{lastpage}           % Needed for total page number
+\usepackage{seqsplit}           % Splits long words.
+%\usepackage{opensans}          % Can't make this work so far. Shame. Would be lovely.
+\usepackage[normalem]{ulem}     % For underlining links
+% Most of the following are not required for the majority
+% of cheat sheets but are needed for some symbol support.
+\usepackage{amsmath}            % Symbols
+\usepackage{MnSymbol}           % Symbols
+\usepackage{wasysym}            % Symbols
+%\usepackage[english,german,french,spanish,italian]{babel}              % Languages
+
+% Document Info
+\author{Dave Child (DaveChild)}
+\pdfinfo{
+  /Title (javascript.pdf)
+  /Creator (Cheatography)
+  /Author (Dave Child (DaveChild))
+  /Subject (JavaScript Cheat Sheet)
+}
+
+% Lengths and widths
+\addtolength{\textwidth}{6cm}
+\addtolength{\textheight}{-1cm}
+\addtolength{\hoffset}{-3cm}
+\addtolength{\voffset}{-2cm}
+\setlength{\tabcolsep}{0.2cm} % Space between columns
+\setlength{\headsep}{-12pt} % Reduce space between header and content
+\setlength{\headheight}{85pt} % If less, LaTeX automatically increases it
+\renewcommand{\footrulewidth}{0pt} % Remove footer line
+\renewcommand{\headrulewidth}{0pt} % Remove header line
+\renewcommand{\seqinsert}{\ifmmode\allowbreak\else\-\fi} % Hyphens in seqsplit
+% This two commands together give roughly
+% the right line height in the tables
+\renewcommand{\arraystretch}{1.3}
+\onehalfspacing
+
+% Commands
+\newcommand{\SetRowColor}[1]{\noalign{\gdef\RowColorName{#1}}\rowcolor{\RowColorName}} % Shortcut for row colour
+\newcommand{\mymulticolumn}[3]{\multicolumn{#1}{>{\columncolor{\RowColorName}}#2}{#3}} % For coloured multi-cols
+\newcolumntype{x}[1]{>{\raggedright}p{#1}} % New column types for ragged-right paragraph columns
+\newcommand{\tn}{\tabularnewline} % Required as custom column type in use
+
+% Font and Colours
+\definecolor{HeadBackground}{HTML}{333333}
+\definecolor{FootBackground}{HTML}{666666}
+\definecolor{TextColor}{HTML}{333333}
+\definecolor{DarkBackground}{HTML}{009487}
+\definecolor{LightBackground}{HTML}{D3ECEA}
+\renewcommand{\familydefault}{\sfdefault}
+\color{TextColor}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhead{} % Set header to blank
+\fancyfoot{} % Set footer to blank
+\fancyhead[L]{
+\noindent
+\begin{multicols}{3}
+\begin{tabulary}{5.8cm}{C}
+    \SetRowColor{DarkBackground}
+    \vspace{-7pt}
+    {\parbox{\dimexpr\textwidth-2\fboxsep\relax}{\noindent
+        \hspace*{-6pt}\includegraphics[width=5.8cm]{/web/www.cheatography.com/public/images/cheatography_logo.pdf}}
+    }
+\end{tabulary}
+\columnbreak
+\begin{tabulary}{11cm}{L}
+    \vspace{-2pt}\large{\bf{\textcolor{DarkBackground}{\textrm{JavaScript Cheat Sheet}}}} \\
+    \normalsize{by \textcolor{DarkBackground}{Dave Child (DaveChild)} via \textcolor{DarkBackground}{\uline{cheatography.com/1/cs/7/}}}
+\end{tabulary}
+\end{multicols}}
+
+\fancyfoot[L]{ \footnotesize
+\noindent
+\begin{multicols}{3}
+\begin{tabulary}{5.8cm}{LL}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{2}{p{5.377cm}}{\bf\textcolor{white}{Cheatographer}}  \\
+  \vspace{-2pt}Dave Child (DaveChild) \\
+  \uline{cheatography.com/davechild} \\
+        \uline{\seqsplit{www}.getpostcookie.com}
+  \end{tabulary}
+\vfill
+\columnbreak
+\begin{tabulary}{5.8cm}{L}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{1}{p{5.377cm}}{\bf\textcolor{white}{Cheat Sheet}}  \\
+   \vspace{-2pt}Published 19th October, 2011.\\
+   Updated 11th May, 2016.\\
+   Page {\thepage} of \pageref{LastPage}.
+\end{tabulary}
+\vfill
+\columnbreak
+\begin{tabulary}{5.8cm}{L}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{1}{p{5.377cm}}{\bf\textcolor{white}{Sponsor}}  \\
+  \SetRowColor{white}
+  \vspace{-5pt}
+  %\includegraphics[width=48px,height=48px]{dave.jpeg}
+  Measure your website readability!\\
+  www.readability-score.com
+\end{tabulary}
+\end{multicols}}
+
+
+
+
+\begin{document}
+\raggedright
+\raggedcolumns
+
+% Set font size to small. Switch to any value
+% from this page to resize cheat sheet text:
+% www.emerson.emory.edu/services/latex/latex_169.html
+\footnotesize % Small font.
+
+\begin{multicols*}{3}
+
+\begin{tabularx}{5.377cm}{x{1.44333 cm} x{3.53367 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Regular Expressions Syntax}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\textasciicircum{} & Start of string \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+\$ & End of string \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+. & Any single character \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+(a|b) & a or b \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+(...) & Group section \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+{[}abc{]} & In range (a, b or c) \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+{[}\textasciicircum{}abc{]} & Not in range \tn 
+% Row Count 7 (+ 1)
+% Row 7
+\SetRowColor{white}
+\textbackslash{}s & White space \tn 
+% Row Count 8 (+ 1)
+% Row 8
+\SetRowColor{LightBackground}
+a? & Zero or one of a \tn 
+% Row Count 9 (+ 1)
+% Row 9
+\SetRowColor{white}
+a* & Zero or more of a \tn 
+% Row Count 10 (+ 1)
+% Row 10
+\SetRowColor{LightBackground}
+a*? & Zero or more, ungreedy \tn 
+% Row Count 11 (+ 1)
+% Row 11
+\SetRowColor{white}
+a+ & One or more of a \tn 
+% Row Count 12 (+ 1)
+% Row 12
+\SetRowColor{LightBackground}
+a+? & One or more, ungreedy \tn 
+% Row Count 13 (+ 1)
+% Row 13
+\SetRowColor{white}
+a\{3\} & Exactly 3 of a \tn 
+% Row Count 14 (+ 1)
+% Row 14
+\SetRowColor{LightBackground}
+a\{3,\} & 3 or more of a \tn 
+% Row Count 15 (+ 1)
+% Row 15
+\SetRowColor{white}
+a\{,6\} & Up to 6 of a \tn 
+% Row Count 16 (+ 1)
+% Row 16
+\SetRowColor{LightBackground}
+a\{3,6\} & 3 to 6 of a \tn 
+% Row Count 17 (+ 1)
+% Row 17
+\SetRowColor{white}
+a\{3,6\}? & 3 to 6 of a, ungreedy \tn 
+% Row Count 18 (+ 1)
+% Row 18
+\SetRowColor{LightBackground}
+\textbackslash{} & Escape character \tn 
+% Row Count 19 (+ 1)
+% Row 19
+\SetRowColor{white}
+{[}:punct:{]} & Any punctuation symbol \tn 
+% Row Count 20 (+ 1)
+% Row 20
+\SetRowColor{LightBackground}
+{[}:space:{]} & Any space character \tn 
+% Row Count 21 (+ 1)
+% Row 21
+\SetRowColor{white}
+{[}:blank:{]} & Space or tab \tn 
+% Row Count 22 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{There's an excellent regular expression tester at: http://regexpal.com/}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{0.84609 cm} x{4.13091 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Pattern Modifiers}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+g & Global match \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+i~* & Case-insensitive \tn 
+% Row Count 3 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+m~* & Multiple lines \tn 
+% Row Count 5 (+ 2)
+% Row 3
+\SetRowColor{white}
+s~* & Treat string as single line \tn 
+% Row Count 7 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+x~* & Allow comments and whitespace in pattern \tn 
+% Row Count 9 (+ 2)
+% Row 5
+\SetRowColor{white}
+e~* & Evaluate replacement \tn 
+% Row Count 11 (+ 2)
+% Row 6
+\SetRowColor{LightBackground}
+U~* & Ungreedy pattern \tn 
+% Row Count 13 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{* PCRE modifier}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.23965 cm} x{2.73735 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{JavaScript RegExp Object}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+compile() & lastParen \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+exec() & leftCOntext \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+global & multiline \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+ignoreCase & rightContext \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+input & source \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+lastIndex & test() \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{lastMatch} \tn 
+% Row Count 7 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.38896 cm} x{2.58804 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{JavaScript Event Handlers}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+onabort & onmousedown \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+onblur & onmousemove \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+onchange & onmouseout \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+onclick & onmouseover \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+ondblclick & onmouseup \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+ondragdrop & onmove \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+onerror & onreset \tn 
+% Row Count 7 (+ 1)
+% Row 7
+\SetRowColor{white}
+onfocus & onresize \tn 
+% Row Count 8 (+ 1)
+% Row 8
+\SetRowColor{LightBackground}
+onkeydown & onselect \tn 
+% Row Count 9 (+ 1)
+% Row 9
+\SetRowColor{white}
+onkeypress & onsubmit \tn 
+% Row Count 10 (+ 1)
+% Row 10
+\SetRowColor{LightBackground}
+onkeyup & onunload \tn 
+% Row Count 11 (+ 1)
+% Row 11
+\SetRowColor{white}
+\mymulticolumn{2}{x{5.377cm}}{onload} \tn 
+% Row Count 12 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.33919 cm} x{2.63781 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{JavaScript Arrays}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+concat() & slice() \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+join() & sort() \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+length & splice() \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+pop() & toSource() \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+push() & toString() \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+reverse() & unshift() \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+shift() & valueOf() \tn 
+% Row Count 7 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{1.74195 cm} x{3.23505 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{JavaScript Numbers and Maths}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+abs() & min() \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+acos() & NEGATIVE\_INFINITY \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+asin() & PI \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+atan() & POSITIVE\_INFINITY \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+atan2() & pow() \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+ceil() & random() \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+cos() & round() \tn 
+% Row Count 7 (+ 1)
+% Row 7
+\SetRowColor{white}
+E & sin() \tn 
+% Row Count 8 (+ 1)
+% Row 8
+\SetRowColor{LightBackground}
+exp() & sqrt() \tn 
+% Row Count 9 (+ 1)
+% Row 9
+\SetRowColor{white}
+floor() & SQRT1\_2 \tn 
+% Row Count 10 (+ 1)
+% Row 10
+\SetRowColor{LightBackground}
+LN10 & SQRT2 \tn 
+% Row Count 11 (+ 1)
+% Row 11
+\SetRowColor{white}
+LN2 & tan() \tn 
+% Row Count 12 (+ 1)
+% Row 12
+\SetRowColor{LightBackground}
+log() & toSource() \tn 
+% Row Count 13 (+ 1)
+% Row 13
+\SetRowColor{white}
+LOG10E & toExponential() \tn 
+% Row Count 14 (+ 1)
+% Row 14
+\SetRowColor{LightBackground}
+LOG2E & toFixed() \tn 
+% Row Count 15 (+ 1)
+% Row 15
+\SetRowColor{white}
+max() & toPrecision() \tn 
+% Row Count 16 (+ 1)
+% Row 16
+\SetRowColor{LightBackground}
+MAX\_VALUE & toString() \tn 
+% Row Count 17 (+ 1)
+% Row 17
+\SetRowColor{white}
+MIN\_VALUE & valueOf() \tn 
+% Row Count 18 (+ 1)
+% Row 18
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{NaN} \tn 
+% Row Count 19 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.63781 cm} x{2.33919 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{JavaScript Booleans}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+toSource() & valueOf() \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+\mymulticolumn{2}{x{5.377cm}}{toString()} \tn 
+% Row Count 2 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.4885 cm} x{2.4885 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{JavaScript Dates}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+Date() & setMonth() \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+getDate() & setFullYear() \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+getDay() & setHours() \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+getMonth & setMinutes() \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+getFullYear & setSeconds() \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+getYear & setMilliseconds() \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+getHours & setTime() \tn 
+% Row Count 7 (+ 1)
+% Row 7
+\SetRowColor{white}
+getMinutes & setUTCDate() \tn 
+% Row Count 8 (+ 1)
+% Row 8
+\SetRowColor{LightBackground}
+getSeconds & setUTCDay() \tn 
+% Row Count 9 (+ 1)
+% Row 9
+\SetRowColor{white}
+getMilliseconds & setUTCMonth() \tn 
+% Row Count 10 (+ 1)
+% Row 10
+\SetRowColor{LightBackground}
+getTime & setUTCFullYear() \tn 
+% Row Count 11 (+ 1)
+% Row 11
+\SetRowColor{white}
+getTimezoneOffset() & setUTCHours() \tn 
+% Row Count 12 (+ 1)
+% Row 12
+\SetRowColor{LightBackground}
+getUTCDate() & setUTCMinutes() \tn 
+% Row Count 13 (+ 1)
+% Row 13
+\SetRowColor{white}
+getUTCDay() & setUTCSeconds() \tn 
+% Row Count 14 (+ 1)
+% Row 14
+\SetRowColor{LightBackground}
+getUTCMonth() & \seqsplit{setUTCMilliseconds()} \tn 
+% Row Count 15 (+ 1)
+% Row 15
+\SetRowColor{white}
+getUTCFullYear() & toSource() \tn 
+% Row Count 16 (+ 1)
+% Row 16
+\SetRowColor{LightBackground}
+getUTCHours() & toString() \tn 
+% Row Count 17 (+ 1)
+% Row 17
+\SetRowColor{white}
+getUTCMinutes() & toGMTString() \tn 
+% Row Count 18 (+ 1)
+% Row 18
+\SetRowColor{LightBackground}
+getUTCSeconds() & toUTCString() \tn 
+% Row Count 19 (+ 1)
+% Row 19
+\SetRowColor{white}
+\seqsplit{getUTCMilliseconds()} & toLocaleString() \tn 
+% Row Count 20 (+ 1)
+% Row 20
+\SetRowColor{LightBackground}
+parse() & UTC() \tn 
+% Row Count 21 (+ 1)
+% Row 21
+\SetRowColor{white}
+setDate() & valueOf() \tn 
+% Row Count 22 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.18988 cm} x{2.78712 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{JavaScript Strings}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+charAt() & slice() \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+charCodeAt() & split() x \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+concat() & substr() \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+fromCharCode() & substring() \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+indexOf() & toLowerCase() \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+lastIndexOf() & toUpperCase() \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+length & toLocaleLowerCase() \tn 
+% Row Count 7 (+ 1)
+% Row 7
+\SetRowColor{white}
+localeCompare() & toLocaleUpperCase() \tn 
+% Row Count 8 (+ 1)
+% Row 8
+\SetRowColor{LightBackground}
+match() x & toSource() \tn 
+% Row Count 9 (+ 1)
+% Row 9
+\SetRowColor{white}
+replace() x & valueOf() \tn 
+% Row Count 10 (+ 1)
+% Row 10
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{search() x} \tn 
+% Row Count 11 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{String object methods with an x support regular expressions.}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{3.08574 cm} x{1.89126 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{JavaScript Functions}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+decodeURI() & isNaN() \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+decodeURIComponent() & Number() \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+encodeURI() & parseFloat() \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+encodeURIComponent() & parseInt() \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+escape() & String() \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+eval() & unescape() \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{isFinite()} \tn 
+% Row Count 7 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+
+% That's all folks
+\end{multicols*}
+
+\end{document}
