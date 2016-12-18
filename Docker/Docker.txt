@@ -1,0 +1,77 @@
+#	help: http://www.it-wars.com/lignes-de-commande-et-snippets-docker/
+#
+#	Commandes pour créer, se connecter et sauvegarder
+#	une machine sur DOCKER (Toolbox sur Windows)
+#
+#	debian: image du docker Hub
+#	debianbox: conteneur
+#	debiansave: image sauvegardé
+#
+
+# Création d'un conteneur avec debian
+docker create --privileged --name debianbox -it debian
+
+# Voir tous les conteneurs
+docker ps -a
+
+# Démarrer le conteneur
+docker start debianbox
+
+# Se connecter au terminal du conteneur
+docker attach debianbox
+
+# Enregistrer l'état du conteneur dans une image
+docker commit debianbox debiansave
+
+# Supprimer le conteneur
+docker rm debianbox
+
+#
+#	Statistiques
+#
+
+# Afficher l'état du système
+docker stats
+
+# Afficher les propriétés d'une image
+docker inspect debianbox/debiansave
+
+#
+#	Manipuler une image
+#
+
+# Afficher la liste des images disponibles
+docker images
+
+# Chercher sur le docker Hub
+docker search debian
+
+# Supprimer une image
+docker rmi debiansave
+
+#
+#	Préparation de la VM
+#
+
+# Installer ifconfig
+apt-get install net-tools
+
+#
+#	Lancement d'un serveur Apache
+#
+
+# Créer le conteneur
+docker create -p 80:80 --privileged --name debianbox -it debiansave
+
+# Démarer le conteneur
+docker start debianbox
+
+# Lancer le serveur apache et mysql
+docker exec debianbox /etc/init.d/apache2 start
+docker exec debianbox /etc/init.d/mysql start
+
+# Retourne l'IP de la machine distante
+docker-machine ip
+
+# Test de la connexion
+curl $docker_ip
