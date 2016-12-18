@@ -1,0 +1,19 @@
+Les fonctions attribuées aux registres :
+De la forme :	MOV AH,.. ; Fonction attribuée à AH
+
+	- AH --
+		- 1 : Saisie de caractère (Le char sera donc dans AL)
+		- 2 : Affichage caractère (Le char doit être dans DL)
+
+	- AX --
+		- 9 : Affichage d'un message (Le string doit être dans DX)
+		      Accompagné de LEA DX,mess_à_afficher
+	
+
+     /\		Chacune de ces instructions doit être suivie de : INT 21h.
+    /  \
+   / !! \
+  /______\
+      |
+      |
+      |
