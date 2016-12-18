@@ -1,0 +1,617 @@
+%!xxd         => Affichier l'éditeur exa
+%!xxd -r      => Revert l'éditeur hexa et retour à la normal
+
+
+Commande	Description
+0	Aller en début de ligne
+$	Aller en fin de ligne
+k	Ligne précédente
+j	Ligne suivante
+h	Caractère précédent
+l	Caractère suivant
+b	Mot précédent
+w	Mot suivant
+Ctrl-B	Page précédente
+Ctrl-F	Page suivante
+nG	Aller à la ligne n. Exemple: 1G va sur la première ligne
+G	Aller à la dernière ligne
+x	Supprime le caractère sous le curseur
+dd	Supprime la ligne courante et la copie dans le presse-papiers
+nd	Idem avec n lignes
+J	Fusionne la ligne courante et la suivante
+yy	Copie la ligne courante dans le presse-papiers
+ny	Idem avec n lignes
+P	Colle le presse-papiers avant la position courante
+p	Colle le presse-papiers après la position courante
+v	Commence une sélection en mode caractères
+V	Commence une sélection en mode lignes
+Ctrl-V	Commence une sélection en mode "rectangulaire"
+d	Supprime la sélection et la copie dans le presse-papiers
+y	Copie la sélection dans le presse-papiers
+c	Supprime la sélection et passe en mode insertion
+i	Passe en mode insertion avant la position courante
+a	Passe en mode insertion après la position courante
+o	Passe en mode insertion sur une nouvelle ligne sous la ligne courante
+Esc	Quitte le mode insertion
+u	Annule la dernière commande
+r	Remplace le caractère sous le curseur par le prochain caractère tapé
+~	Convertit le caractère sous le curseur en majuscule si c'est une minuscule et vice-versa
+/texte	Recherche en avant du texte indiqué
+?texte	Recherche en arrière du texte indiqué
+n	Recherche l'occurrence suivante
+N	Recherche l'occurrence précédente
+:%s/chercher/remplacer	Recherche avec remplacement dans tout le fichier
+:w	Sauvegarde le fichier courant
+:wfichier	Ecrit le document dans le fichier indiqué
+:rfichier	Inclut le fichier indiqué à partir de la position courante
+:q!	Quitter en annulant les modifications
+ZZ (ou :wq)	Quitter en enregistrant les modifications
+
+________________________________________________________________________________________
+
+ Vim, Guide de survie
+
+    Imprimer	
+    E-mail	
+
+    Catégorie : Non catégorisé	
+    Publié le dimanche 14 octobre 2012 14:54 
+    Écrit par xavier 
+    Affichages : 440 
+
+Guide de survie !!
+
+Commandes
+vi [nomfichier] - ouvre le fichier nomfichier dans VI
+vi -r [nomfichier] - ouvre la dernière version du fichier nomfichier dans VI en cas de crash system ou de l'éditeur
+vi +nn [nomfichier] - ouvre le fichier nomfichier a la ligne nn dans VI (ou la dernière si nn > au nombre de lignes)
+vi [nomfichier1] [nomfichier2] - ouvre nomfichier1 et nomfichier2 dans VI
+:n - passe au fichier suivant après avoir enregistré le fichier courant
+:n! - passe au fichier suivant sans avoir enregistré le fichier courant
+:sp - divise la fenetre en deux horizontalement
+:vsp - divise la fenetre en deux verticalement
+:sp fich2 - divise la fenêtre en deux et ouvre fich2 dans la deuxième partie
+Ctrl w Ctrl w - change de fenêtre(fenêtres divisées)
+Ctrl w j - change de fenêtre en descendant(fenêtres divisées)
+Ctrl w k - change de fenêtre en montant(fenêtres divisées)
+Ctrl w h - change de fenêtre vers la gauche(fenêtres divisées)
+Ctrl w k - change de fenêtre vers la droite(fenêtres divisées)
+u - annule la dernière action
+U - annule toutes les dernières actions sur la ligne courante
+. - répete la dernière action
+Ctrl+g - affiche des infos sur le fichier (nom, modifié ou non, nombre de lignes, position du curseur en %)
+:w - enregistre le fichier
+:w! - enregistre en ignorant les permissions du fichier (écrit dans un fichier en lecture seule, droits nécessaires sur le fichier)
+:w>>fich1 - enregistre le fichier courant a la fin du fichier fich1
+:q - quitte VIm
+:q! - quitte sans enregistrer
+:x - enregistre et quitte (= :wq = ZZ)
+:e fich1 - ouvre le fichier fich1 sans ressortir de VI (enregistrer le fichier courant avant)
+:e+25 fich1 - ouvre le fichier fich1 a la ligne 25
+:e! fich1 - ouvre le fichier fich1 en abandonnant les modifications
+:e! - réouvre le fichier courant en abandonnant les modifications
+:e# - réouvre le dernier fichier
+:args - affiche la liste des fichiers ouverts
+:rew - ouvre le premier fichier de la liste des fichiers ouverts
+:f fich2 - change le nom du fichier ouvert en fich2
+:! commande - exécute une commande externe sans sortir de VI
+La touche Echap quitte le mode édition(retour au mode commande)
+
+Répétition
+3X - répète 3 fois la commande X
+
+Auto-complétion
+Ctrl+p - tapez après le début du mot et VI complète avec un mot commençant par les mêmes lettres (recherche sur les mots précédents)
+Ctrl+n - tapez après le début du mot et VI complète avec un mot commençant par les mêmes lettres (recherche sur les mots suivants)
+:ab ch1 chainequejeneveuxpasressaisirenentierachaquefois - saisie d'une abréviation, tapez ensuite ch1 puis Tab pour insérer chainequejeneveuxpasressaisirenentierachaquefois
+:ab - affiche les abréviations
+:una ch1 - supprime l'abréviation ch1
+
+Déplacement
+h - 1 caractère a gauche
+l - 1 caractère a droite
+j - ligne suivante
++ - ligne suivante
+k - ligne précédente
+- - ligne précédente
+O - début de ligne
+$ - fin de ligne
+:0 - début du fichier
+gg - début du fichier
+:$ - fin du fichier
+G - fin du fichier
+H - haut de l'écran
+L - bas de l'écran
+M - milieu de l'écran
+:n - ligne n
+nG - ligne n
+w - mot suivant (début)
+e - fin du mot courant ou suivant
+b - mot précédent (début)
+) - phrase suivante
+( - phrase précédente
+} - paragraphe suivant
+{ - paragraphe précédent
+]] - section suivante
+[[ - section précédente
+fx - caractère x suivant
+Fx - caractère x précédent
+tx - caractère précédent le x suivant
+Tx - caractère suivant le x précédent
+mx - marque le caractère courant avec le caractère x
+'x - revient au premier non blanc de la ligne marquée x
+'' - annule le déplacement ci dessus
+`x - revient au caractère marqué x
+`` - annule le déplacement ci dessus
+
+
+Insertion
+a - insère après le caractère courant
+A - insère a la fin de la ligne
+i - insère avant le curseur
+I - insère en début de ligne
+o - insère sur nouvelle ligne en dessous de la ligne courante
+O - insère sur nouvelle ligne au dessus de la ligne courante
+p - insère le contenu du buffer après le curseur (ou après la ligne si le buffer contient des lignes)
+P - insère le contenu du buffer avant le curseur (ou avant la ligne si le buffer contient des lignes)
+cl - efface le caractère sous le curseur pour remplacement
+cw - efface le mot sous le curseur pour remplacement
+C - efface la fin de la ligne pour remplacement
+J - concatène la ligne courante et la ligne suivante
+r - remplace le caractère sous le curseur
+R - remplace a partir du curseur
+>> - indente a gauche
+<< - indente a droite
+Ctrl+t - indente a gauche en mode édition
+Ctrl+t - indente a gauche en mode édition
+:r fich1 - insère le contenu du fichier fich1 sous la ligne courante
+:50r fich1 - insère le contenu du fichier fich1 a la ligne 50
+:r! commande - insère la sortie de la commande sous la ligne courante
+:50r! commande - insère la sortie de la commande a la ligne 50
+
+Copier et couper
+v - début de la sélection visuelle, utiliser ensuite les touches de déplacement
+x - coupe le caractère sous le curseur("nx pour couper et utiliser le tampon n)
+X - coupe le caractère précédent le curseur
+cc - coupe le contenu de la ligne courante
+dd - coupe la ligne courante
+dw - coupe la fin du mot sous le curseur
+D - coupe la fin de la ligne (= d$)
+yy - copie la ligne courante("nyy pour le tampon n)
+yw - copie le mot courant a partir du curseur
+y$ - copie jusqu’à la fin de la ligne
+y0 - copie jusqu’au début de la ligne
+:10,15t 50 - copie les lignes 10 a 15 et les colle a la ligne 50
+:50$m 10 - coupe les lignes 50 a la fin du fichier et les colle a la ligne 10
+p - colle le contenu du tampon("np pour le tampon p)
+:50,100w nouveau.txt - copie les lignes 50 a 10 dans le fichier nouveau.txt (w! si nouveau.txt existe déjà)
+Il y a 26 tampons dans vi, nommés de a à z.
+"tyw - copie le mot courant dans le tampon t
+"ldd - coupe la ligne courante dans le tampon l
+"tp - colle le contenu du tampon p
+
+Expression régulières
+. - un caractère
+* - 0 ou plusieurs fois le caractère précédent
+^ - début de ligne
+$ - fin de ligne
+[abc] - un caractère contenu dans abc
+[^def] - un caractère non contenu dans def
+[a-f] - un caractère entre a et f inclus
+[-a-f] - un caractère entre a et f inclus ou un -(le - doit être le premier caractère)
+\(10|20\) - le chiffre 10 ou le chiffre 20
+\< - début du mot
+\> - fin du mot
+
+Recherche et remplacement
+/abc - recherche de la chaine de caractères abc suivante
+?abc - recherche de la chaine de caractères abc précédente
+n - recherche de l'occurence suivante de la chaine recherchée
+N - recherche de l'occurence précédente de la chaine recherchée
+// - relance la dernière recherche
+:s/chain1/chain2/g - remplace chain1 par chain2 sur toute la ligne courante
+:20,50 s/chain1/chain2/g - entre les lignes 20 à 50, remplace chain1 par chain2
+:20,50 s/chain1/chain2/gc - entre les lignes 20 à 50, demande confirmation avant de remplacer chain1 par chain2
+:20,50 s/chain1/chain2/gp - entre les lignes 20 à 50, remplace chain1 par chain2 et affiche le dernier changement. Utiliser n et N pour rechercher les changements précédents et suivants
+:1,$ s/chain1/chain2/ - de la ligne 1 a la fin du fichier, remplace la première occurence de chain1 par chain2
+:1,$ s/chain1/chain2/g - de la ligne 1 a la fin du fichier, remplace chain1 par chain2
+:s/chain1/&chain2/ - ajoute chain2 après chain1 sur la première occurence de la ligne
+:s/[A-E]....1/&chain2/g - ajoute chain2 après tous les mots de 6 lettres commençant par A,B,C,D ou E et finissant par 1 sur toute la ligne
+:g/chain$/d - supprime toutes les lignes finissant par chain
+:g!/chain/d - supprime toutes les lignes ne contenant pas chain
+:1,$ s/chain./chain5/g - remplace chain1, chain2, chaina, chainb etc... par chain5
+:g/^#/d - supprime toutes les lignes commençant par un commentaire #
+:g/^[\.]*$/d - supprime toutes les lignes vides
+:50,100 s%chain1/chain2%chain3%g - de la ligne 50 a 100, remplace chain1/chain2 par chain3 (utilise % au lieu de / comme séparateur, & fonctionne aussi)
+:50,100 s/chain1\/chain2/chain3/g - de la ligne 50 a 100, remplace chain1/chain2 par chain3 (Echappement du caractère / par \/ entre chain1 et chain2)
+:~ - relance la dernière commande de remplacement sur la ligne courante
+
+Key mapping et personnalisation
+Les touches non utilisées comme les touches de fonctions peuvent être assignées a une commande
+Valider par Entrée après la saisie d'une nouvelle map
+:map <f2> dd - assigne la combinaison de touche dd a la touche F2
+:map <f3> :s/chain1/chain2/gc - assigne la commande :s/chain1/chain2/gc a la touche F3
+
+Replis
+zf10j - crée un repli de la ligne courante plus 10 lignes
+zf/chain - crée un repli jusqu'a la chaîne chain
+zfa} - crée un repli jusqu'a la prochaine accolade fermante (idem avec ) ] >)
+zfa2} - crée un repli englobant le bloc { } de niveau supérieura celui ou on se trouve (idem avec ) ] >)
+[z - déplace le curseur au début du repli ouvert
+z] - déplace le curseur a la fin du repli ouvert
+zo - ouvre le repli sous le curseur
+zO - ouvre tous les replis et sous replis sous le curseur
+zr - ouvre un niveau de repli (replis imbriqués)
+zc - referme le repli sous le curseur
+zC - referme le repli et tous les sous replis sous le curseur
+zM - referme tous les replis du fichier
+zd - supprime le repli sous le curseur
+zD - supprime le repli et tous ses sous replis (replis imbriqués)
+zE - supprime tous les replis du fichier
+:set foldmethod=indent - repli automatique sur l'indentation
+:set foldmethod=syntax - repli automatique sur la syntaxe 
+
+______________________________________________________________________________________
+
+Options d'ouverture d'un fichier
+$ vi +n file
+Opens file at line number n.
+$ vi + file
+Opens file at last line.
+$ vi +/pattern file
+Opens file at the first occurrence of pattern (ou 'pattern' est une regex)
+$ vi +/"pattern file"
+Si l'expression comporte des espaces
+
+Recherche
+/ -- chercher en avant
+? -- chercher en arriere
+
+n -- l'occurence suivante
+N -- l'occurence precedente
+
+£ -- rechercher d'autres occurences du mot ou on se trouve
+
+% -- trouve l'ouvrant ou le ferment de ( ] }
+
+Crtl-g donne le numero de la ligne
+. -- numero de la ligne (ex .s/float/double/)
+G -- aller la fin
+n G -- aller la ligne n
+Ctrl f -- un ecran en avant
+Ctrl b -- un ecran en arriere
+
+OBJETS
+Ceux-ci peuvent être associés avec des opérateurs comme d, y ou c ...
+w -- début du mot suivant (sauf dans cw)
+e -- fin du mot suivant
+b -- précédent début de mot
+aw -- mot courant avec l'espace qui suit
+iw -- mot courant sans l'espace qui suit
+as -- phrase courante avec l'espace qui suit
+is -- phrase courante sans l'espace qui suit
+^ ou 0 -- début de ligne
+$ -- fin de ligne
+} -- paragraphe suivant
+{ -- paragraphe precedent
+H -- haut de l'cran
+L -- bas de l'ecran
+gg -- debut de fichier
+G -- fin de fichier
+
+Substitution
+To substitute new for the first old on a line type
+:s/old/new
+To substitute new for all 'old's on a line type
+:s/old/new/g
+To substitute phrases between two line #'s type
+:#,#s/old/new/g
+To substitute all occurrences in the file type
+:%s/old/new/g
+To ask for confirmation each time add 'c'
+:%s/old/new/gc
+
+%s/\/boire/g --
+matchera seulement la chaine seule, ici "manger" sera remplacé par "boire" mais "démanger" ne sera pas remplacé par "déboire".
+
+A good vim regexp memo at http://www.geocities.com/volontir/?200912#pattern
+
+Enregistrement
+:n,N w filename -- sauve les lignes n N dans le fichier filename
+:saveas -- pour enregistrer sous un nouveau nom
+
+Insertion
+A -- ajouter la fin de la ligne
+I -- ajouter au début de la ligne au niveau du premier caractère non blanc
+10i#[esc][enter] -- affiche ###########
+10itoto[esc][enter] -- affiche totototototototototototototototototototo
+
+Remplacement
+r -- remplacer une lettre
+(ou plusieurs pas la même lettre, ex: 3 r a, remplace 3 lettres par a)
+R -- remplacer plusieurs lettres
+
+Copier/coller couper/coller
+:10,33m70 -- déplace les lignes 1 et 13 apres laligne 70
+(10,13,m$ ! a la fin du fichier)
+:23,29co100 -- Copy lines 23 through 29 and put after line 100.
+
+yy ou Y -- copier une ligne
+d -- supprime et met dans le buffer
+y -- met dans le buffer
+p -- colle apres le curseur
+P -- colle avant le curseur
+
+LE MODE VISUEL
+C'est une façon de sélectionner visuelement du texte pour faire des opérations sur lui (copie, suppression...). La sélection peut se faire en déplaçant le curseur ou bien la souris (si active et dans un xterm, pour l'activer : set mouse="a").
+
+v -- mode visuel simple
+V -- sélectionne des lignes
+Ctrl v -- Sélection une zone rectangulaire
+
+Une fois en mode visuel :
+o -- aller à l'autre bout de la selection (pour la corriger)
+O -- en mode rectangulaire aller de l'autre côté sur la même ligne
+gv -- rappeler la dernière selection effectuée par le mode visuel
+
+> -- decaler le bloc à droite d'une indentation 
+< -- decaler le bloc à gauche d'une indentation 
+= -- reindente le bloc
+y -- yank ( copie ) le bloc ( coller avec 'p')
+d -- supprimer le bloc
+c -- changer le bloc '
+
+DIVERS
+~ -- changer la casse (marche en mode visuel)
+f a -- trouve la prochaine occurence de la lettre a sur la ligne courante
+exemple : df] pour supprimmer jusqu'au prochain ]
+. -- répete la dernière commande, sauf u, Crtl R et les commandes qui commencent par :
+J -- Supprime le prochain saut de ligne, rassemble deux lignes donc.
+:r! commande -- insere la sortie de la commande
+CTRL-A -- Incrémenter un nombre de 1
+CTRL-X -- Soustrait 1 à un nombre
+4 CTRL-A -- Incrémenter un nombre de 4
+
+ABBREVIATIONS et MACROS
+:ab abréviation texte à abréger
+:una abréviation -- désactive l'abréviation
+
+:map reccourci commande
+exemple: map [F1] 10dd : des lors, F1 efface 10 lignes.
+macro pour les commentaires unix --> map [F8] I#j
+il suffira ds lors de garder F8 enfonce pour commenter en rafale
+macro pour les commentaires php --> map [F9] I//j
+
+ENREGISTRER UNE SEQUENCE DE COMMANDES
+qa -- commence l'enregistrement dans le buffer "a"
+q -- termine l'enregistrement
+@a -- appelle la sequence enregistrée dans le buffer "a"
+(on peut précéder l'appel par un nombre multiplicateur)
+
+COMPLETION AUTOMATIQUE
+CTRL-x CTRL-n -- Compléter un mot en cherchant parmi les mots précédents (CTRL-n à nouveau pour passer à la prochaine possibilité
+CTRL-x CTRL-l -- La même chose pour une ligne
+CTRL-x CTRL-k -- Complète un mot en cherchant dans un dictionnaire
+
+:set dict=nom-du-fichier -- Spécifie le dictionnaire de recherche
+
+MULTIFENETRAGE
+Ouvrir des fichiers dans des fenetres diffrentes -- vim -o one.txt 2.c 3.php
+CRTL-W s (ou :split) -- scinder la fenêtre en deux horizontalement
+CRTL-W vs (ou :vsplit) -- scinder la fenêtre en deux verticalement
+:split fichier -- scinder la fenêtre et éditer `fichier' dans la nouvelle fenetre
+
+:new ou :vnew -- ouvrir une nouvelle fenêtre sur un fichier vide
+`:split' et `:new' peuvent être précédés du nombre de ligne de la fenêtre à ouvrir
+CTRL-W CTRL-W -- passer d'une fenêtre à l'autre
+CTRL-W {touche fleche ou h, j, k, l} -> passer d'un fentre l'autre aussi
+CTRL-W t -- aller à la fenetre la plus haute
+CTRL-W b -- aller à la fenetre la plus basse
+CTRL-W + -- agrandir la fentre d'une ligne (on peut précéder d'un nombre multiplicateur)
+CTRL-W - -- réduire la fenêtre d'une ligne (on peut précéder d'un nombre)
+{nombre}CTRL-W _ -- donner une taille définie à la fenêtre
+CTRL-W _ -- maximise la fentre
+Pour redimensionner on peut aussi utiliser la souris dans un xterm (set mouse=a)
+CTRL-W c (ou :close) -- fermer la fenetre où on a le focus
+CTRL-W o (ou :only) -- fermer les autres fenêtres
+Pour quitter on ajoute le suffixe `all' -- :qall, :wall, :wqal, :qall!
+:windo -- Exécute la commande dans toutes les fenêtres ouvertes.
+
+EDITER PLUSIEURS FICHIERS
+:e file.txt -- editer un autre fichier (on doit sauvegarder le fichier courant avant)
+:ls -- lister tous les buffers de fichiers édité
+:bu 6 -- éditer le buffer 6
+:bufdo commande -- execute la commande dans tous les buffers
+:e! file.txt -- pour diter un autre fichier sans sauvegarder le fichier courant avant (changements perdus)
+:hide edit file.txt -- pour éditer un autre fichier sans sauvegarder le fichier courant avant et sans perdre les changements
+vim one.c two.c three.c -- pour ouvrir plusieurs fichiers la fois
+:n -- passer au fichier suivant
+:e# ou :rew -- rééditer le fichier précédent
+:n! -- passer ou fichier suivant sans sauvegarder
+:wnext -- passer ou fichier suivant en sauvegardant
+:args -- voir les fichiers ouverts eu démarrage et lequel on édite
+:args fichier -- rajoute le fichier à cette liste
+:argdo commande -- exécute la commande sur tous les fichiers de la liste d'arguments
+
+Quand on revient un fichier :
+'" -- revenir à la position du curseur o on tait
+'. -- revenir à la position du dernier changement effectué
+
+
+Exemples de combinaisons
+Change Delete Copy from Cursor to ...
+cH dH yH top of screen
+cL dL yL bottom of screen
+c+ d+ y+ next line
+c5| d5| y5| column 5 of current line
+2c) 2d) 2y) second sentence following
+c{ d{ y{ previous paragraph
+c/pattern d/pattern y/pattern pattern
+cn dn yn next pattern
+cG dG yG end of file
+c13G d13G y13G line number 13
+d1G -- Efface du curseur au début du fichier
+
+RACCOURCIS
+x stands for dl (delete character under the cursor)
+X stands for dh (delete character left of the cursor)
+D stands for d$ (delete to end of the line)
+C stands for c$ (change to end of the line)
+s stands for cl (change one character)
+S stands for cc (change a whole line)
+
+Utilisation non-interactive
+Le ``-'' permet à vim de lire depuis l'entrée standard.
+Exemple :
+$ ps ax|vim -
+On peut écrire dans un fichier un script de commandes, comme par exemple :
+%s/Jean/Jacques/g
+write tempfile
+quit
+
+Puis on applique ce script à une série de fichier comme ceci :
+for file in *.txt; do
+cp $file $file-bak
+vim -e -s $file < monscript.vim
+mv tempfile $file
+done
+-e indique d'executer vim en mode Ex. -s c'est le mode silencieux.
+
+Toutes les occurences de "Jean" son remplacée par "Jacques" dans tous les fichiers *.txt et on a conservé les versions originales avec -bak ajouté à la fin du nom.
+
+F1 mène à l'aide.
+:h macommande, donne l'aide sur le commande. Exemple : :h t
+
+Et pour les programmeurs...
+% -- saute entre des paires de parenthèse correspondantes () {} [] <>.
+Avec l'extension match-it, il sautera entre des balises correspondante dans les fichiers html
+
+La commande goto est aussi très utile :
+gD -- va à la déclaration globale de la variable ou de la fonction sous le curseur. Cependant, cela fonctionnera seulement dans le même fichier.
+gF -- va vers le nom de fichier sous le curseur. Très utile pour sauter vers les fichiers d'en-tête. 
+___________________________________________________________________________________
+
+Ceci n'est pas le manuel officiel de Vim. Il s'agit plutôt d'une liste des commandes principales regroupées sur un page.
+Ces commandes me servent tous les jours et cette page me sert de pense-bête.
+
+Insertion
+Le mode insertion permet d'éditer un fichier. On sort du mode insertion en appuyant sur Esc (on revient alors en mode commande)
+i : insere a la postion du curseur
+I : insere au debut de la ligne
+a : insere a la position a droite du curseur
+A : insere a la fin de la ligne
+J : Joint la ligne suivante au bout de la ligne courante
+Enregistrement et sortie
+:w : sauvegarde le fichier
+:w nomfich : sauvegarde le fichier sous le nom nomfich
+(ATTENTION APRES ON N'EDITE PAS nomfich !!! ON CONTINUE AVEC L'ANCIEN !!)
+:q quitte sans sauver (signale si fichier modifie avant de quitter)
+
+:q! quitte sans sauver et sans signal de fichier modifie
+:x ou :wq : sauve et quitte
+Définition du type de fichier
+Ceci redéfinit le type de fichier si nécessaire
+:set fileformat=unix
+:set fileformat=dos
+Déplacement
+/mot : Cherche le mot "mot"
+:20 : Va à la ligne numéro 20
+20| : Va à la 20è colonne sur la ligne
+k : Déplace le curseur vers le haut (ou utiliser les flèches si elles fonctionnent)
+l : Déplace le curseur vers la droite (ou utiliser les flèches si elles fonctionnent)
+j : Déplace le curseur vers le bas (ou utiliser les flèches si elles fonctionnent)
+h : Déplace le curseur vers la gauche (ou utiliser les flèches si elles fonctionnent)
+G : Déplace le curseur à la fin du fichier
+Définition des variables set
+:set {no}qqchose : définit (ou annule) une fonctionnalité de vim
+:set ic : Rend les recherches insensibles à la casse
+Alignement
+:set textwidth=80 : Largeur d'une ligne du fichier (si la ligne est trop longue, vim renvoie a la ligne automatiquement EN MODE INSERTION !!)
+:{range}center [width] : aligne au centre selon la range choisie et width indique la largeur de la page.
+:center : aligne le texte tape au centre.
+:right : aligne le texte a droite
+:left : aligne le texte a gauche
+Indentation
+:set nocindent : Enleve l'indentation pour les programmes en C (Utile avant un copy souris)
+:set noautoindent : Enleve l'indentation pour les programmes en C (Utile avant un copy souris)
+:set nopaste : Enleve l'indentation pour les programmes en C (Utile avant un copy souris)
+:set autoindent : Indentation automatique
+:set shiftwidth=4 : Largeur de l'indent (8 car. par defaut)
+:set softtabstop=4 : Largeur de l'indent quand on pose un TAB
+
+:set tabstop=3 -\ Realigne un code en tabulation a la valeur 3 a la place de
+:retab 8       -/ la valeur 8
+
+/* vim: set ts=4 sw=4: */ : Placé en tete d'un fichier PHP, il est recallé avec 4 cars. par TAB!!!
+1GVG= : indente le code du fichier complet
+Remplacement
+:[range]s/from/to/[flags]
+flags interressants :
+     g : pour toutes les occurences sur la ligne
+     c : demande la validation de la modification
+from : pattern
+     :s/^the/these/ : recherche en debut de ligne
+range :
+     :1,5s/this/that/g : change sur les lignes 1 a 5
+     :.,$s/yes/no/ : change depuis la ligne courante jusqu'a la fin du
+fichier
+definir des marques :
+mt : mark top (marque le sommet du bloc)
+mb : mark bottom (marque la fin du bloc)
+:'t,'b : range inclus dans les marques
+Effacement
+dd : delete ligne
+dw : delete word
+d$ : delete jusqu'a la fin de la ligne
+d^ : delete jusqu'au debut de la ligne
+x : effacement du caractere sous le curseur
+X : effacement du caractere a gauche du curseur
+Copie / Colle
+yy : Selectionne ligne
+yw : Selectionne word
+y$ : Selectionne jusqu'a la fin de la ligne
+y^ : Selectionne jusqu'au debut de la ligne
+Colle
+p : colle le contenu de la copie ou de l'effacement en dessous du curseur
+P : colle le contenu de la copie ou de l'effacement au dessus du curseur
+Changement
+cd : Change ligne
+cw : Change word
+c$ : Change jusqu'a la fin de la ligne
+c^ : Changement jusqu'au debut de la ligne
+Mode Visuel
+v : Passe en mode visuel (par mot)
+V : Passe en mode visuel (par ligne)
+Ctrl+V : Passe en mode visuel (par bloc)
+Selectionne les lignes a partir du curseur
+Taper ensuite la touche selon l'action que vous souhaitez faire de la selection. Ex. : d pour effacer, y pour copier ...
+Répétition
+.(point) : Répète la derniere action
+Affichage des caractères tab et retour chariot
+:set list : Affiche ^I pour les tabs et $ pour les retour chariots
+Coloration Syntaxique
+:syntax enable : active la coloration syntaxique (si possible)
+Les diverses colorations peuvent etre vues dans : /usr/share/vim/vim61/syntax
+Si vi ne detecte pas le type automatiquement faire :
+:set filetype=fortran : si le type est fortran
+80 Caractères par ligne dans le HTML
+Mettre ces deux lignes quelque part. Attention, garder sur deux lignes !!
+
+<!-- vim: tw=80:
+-->
+
+Augmenter/Diminuer un nombre
+Si on appuie sur CTRL+A, on incrémente le chiffre sous le curseur et CTRL-X décrémente le chiffre sous le curseur, ce en mode commande.
+Réorganiser un paragraphe pour qu'il soit dans les 80 colonnes
+:set tw=80
+gqap
+ATTENTION : Il s'agit de paragraphe, les listes numeriques ne sont pas considérées comme paragraphe !
+Split Ecran
+:vsp nomfich : Partage l'écran en deux verticalement, avec chargement de nomfich
+:hsp nomfich : Partage l'écran en deux horizontalement, avec chargement de nomfich
+[CTRL]+w : Change de split
+Voir les différences entre deux fichiers en couleur
+vimdiff fichier1 fichier2 : il s'agit de l'appel de vimdiff dans la console, pas dans vim...
+Edition de plusieurs fichiers
+:bn : aller sur le fichier (buffer) suivant
+:bp : aller sur le fichier précédent

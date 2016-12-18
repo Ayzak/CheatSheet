@@ -1,0 +1,18 @@
+﻿Effacer ou corriger
+
+Dans tous les exemples suivants, la touche 'd' sert à supprimer, 
+et 'c' sert à corriger (supprimer puis passer en insertion).
+Exemples simples 
+:
+
+dw/cw : «delete/correct word» efface/corrige depuis la position du curseur jusqu'à la fin 
+du mot
+
+ci' : «correct in quotes», 
+ca' : «correct a quote», 
+ci( : «correct in parenthesis», 
+
+ct= : «correct to '='», supprime depuis la position courante du curseur jusqu'au signe '=' non inclus, 
+et passe en insertion
+cf= : «correct find '='», supprime depuis la position courante du curseur jusqu'au 
+signe '=' inclus, et passe en insertion
