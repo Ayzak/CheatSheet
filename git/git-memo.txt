@@ -1,0 +1,19 @@
+git add
+git rm
+git commit
+git ls-tree
+git checkout
+
+git log
+git status
+gif diff 
+
+
+/* Lorsqu'une branche temporaire est crée. */
+  455  git branch -v
+  456  git checkout fe4a78e63b4d3d1f98ec0e04e4930d983d6b1afe
+  457  git checkout alpha2 
+  458  git merge fe4a78e63b4d3d1f98ec0e04e4930d983d6b1afe
+  459  git branch -v
+  460  git push
+  461  git ls-tree alpha2 
